@@ -5,6 +5,8 @@ public class ChallengeCup2 {
 
 	public static void main (String[] args)  throws Exception {
 
+		String subject1 = args[0];
+		System.out.println(subject1);
 	    Connection con = null;
 	    int numOfTeams = 8;
 	    int numOfTeamsAll = numOfTeams*2;

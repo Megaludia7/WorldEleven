@@ -1,2 +1,5 @@
-javac -cp /Users/shotamiyawaki/ProgramDev/JDBC/mysql-connector-java-8.0.21.jar: FirstTry.java 
-java -cp /Users/shotamiyawaki/ProgramDev/JDBC/mysql-connector-java-8.0.21.jar: FirstTry
+javac -cp /Users/shotamiyawaki/ProgramDev/JDBC/mysql-connector-java-8.0.21.jar: ChallengeCup2.java 
+java -cp /Users/shotamiyawaki/ProgramDev/JDBC/mysql-connector-java-8.0.21.jar: ChallengeCup2
+
+javac  ChallengeCup.java 
+java  ChallengeCup
