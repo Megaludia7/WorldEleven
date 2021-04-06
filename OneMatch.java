@@ -15,7 +15,7 @@ public class OneMatch {
 	    // //int log = (int) log(numOfGames)/log(2);
 		// //Teams which participate in this tounament
 	    // int j = log;
-	    // OneTeam[] teamList = new OneTeam[numOfTeamsAll];
+	    OneTeam[] teamList = new OneTeam[2];
 	    // DemoGame[] gameList = new DemoGame[numOfGames];
 	    
 	    // teamList[0] = new OneTeam("Brazil",90);
@@ -27,17 +27,27 @@ public class OneMatch {
 	    // teamList[6] = new OneTeam("Italy",88);
 	    // teamList[7] = new OneTeam("Argentena",91);
 	    
+		
 	    try{
 			con = DriverManager.getConnection("jdbc:mysql://localhost/worldeleven", "root", "mysql");
-			PreparedStatement st = con.prepareStatement("select * from nationlist;");
+			PreparedStatement st = con.prepareStatement("select name, power from nationlist where name in (select team_name_1 as teamname from tournament_game_list where game_number  = '1' union select team_name_2 as teamname from tournament_game_list where game_number  = '1'); ");
 			//numOfTeams = 1;
 			//st.setInt(1,numOfTeams);
 			ResultSet res = st.executeQuery();
 			System.out.println("get");
+
+			int i = 0;
 			while (res.next()) {
 				String name = res.getString("name");
-				System.out.println("Team is " + name);	
+				int power = res.getInt("power");
+				System.out.println("Team is " + name +", that power is " + power + ".");
+				teamList[i] = new OneTeam(name,power);
+				i = i + 1;
 			}
+			DemoGame oneGame = new DemoGame(teamList[0], teamList[1]);
+			oneGame.fullTime();
+			String winnerTeamName = oneGame.winnerName();
+			System.out.println(winnerTeamName);
 	    } catch (SQLException e) {
 			System.out.println("Failed");
 	    }

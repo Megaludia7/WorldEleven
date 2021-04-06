@@ -1,0 +1,10 @@
+1.     
+    1.1. PlayOneLeagueGame
+        input  : 
+        output : 勝者の名前 String
+        1.1.1. CompetitionDAO
+            input  : 
+            output : teamList[2]
+    1.2. SetNextGame
+        input  : 勝者の名前 String
+    

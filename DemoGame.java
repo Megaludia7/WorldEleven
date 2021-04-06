@@ -9,20 +9,17 @@ public class DemoGame {
 		this.team2 = team2;
 		this.team1.setScore(0);
 		this.team2.setScore(0);
-
-
 	}
 
+	//テスト用クラス
 	public DemoGame (String teamName1,String teamName2) {
 		this.team1 = new OneTeam(teamName1,39);
 		this.team2 = new OneTeam(teamName2,59);
-
-		//this(OneTeam(teamName1,39),OneTeam(teamName2,59));
 	}
 
 	public void onePlay() {
 		Random random = new Random();
-		int power1,power2;
+		int power1, power2;
 		power1 = team1.getTeamPower();
 		power2 = team2.getTeamPower();
 		power1 += random.nextInt(5);
@@ -32,7 +29,6 @@ public class DemoGame {
 			team1.setScore(team1.getScore() + 1);
 		} else if (power1 < power2) {
 			team2.setScore(team1.getScore() + 1);
-		} else {
 		}
 	}
 
@@ -42,6 +38,7 @@ public class DemoGame {
 			onePlay();
 		}
 	}
+	
 	public OneTeam winner () {
 		int score1 = team1.getScore();
 		int score2 = team2.getScore();
