@@ -1,10 +1,24 @@
-1.     
-    1.1. PlayOneLeagueGame
-        input  : 
+1. トーナメント1試合実施
+    使用DB : tournament_game_list
+    input  : トーナメントid, gamenumber
+    output : リターンコード
+
+    1.1. PlayOneTournamentGame
+        input  : トーナメントid, gamenumber
         output : 勝者の名前 String
         1.1.1. CompetitionDAO
-            input  : 
+            input  : tournament_game_list.gamenumber
             output : teamList[2]
+    
     1.2. SetNextGame
         input  : 勝者の名前 String
-    
+        output : リターンコード
+        更新DB : tournament_game_list
+
+
+2. 国トーナメント表作成
+    input  : トーナメントid
+    output : リターンコード
+    使用DB : tournament_game_list, nation_list
+    2.1 MakeOneTournament
+
