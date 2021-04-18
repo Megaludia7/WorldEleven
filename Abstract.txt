@@ -1,4 +1,4 @@
-1. トーナメント1試合実施
+1. トーナメント1試合実施(trial ver. is OneMatch)
     使用DB : tournament_game_list
     input  : トーナメントid, gamenumber
     output : リターンコード

@@ -7,11 +7,16 @@ public class OneMatch {
 
 	    Connection con = null;
 	    OneTeam[] teamList = new OneTeam[2];
+		//String tournamentId = args[0];
+		//String gameNumber = args[1];
 		
 	    try{
 			//チーム名の取得
 			con = DriverManager.getConnection("jdbc:mysql://localhost/worldeleven", "root", "mysql");
+			// PreparedStatement st = con.prepareStatement("select name, power from nationlist where name in (select team_name_1 as teamname from tournament_game_list where game_number  = '?' union select team_name_2 as teamname from tournament_game_list where game_number  = '?'); ");
 			PreparedStatement st = con.prepareStatement("select name, power from nationlist where name in (select team_name_1 as teamname from tournament_game_list where game_number  = '1' union select team_name_2 as teamname from tournament_game_list where game_number  = '1'); ");
+			// st.setString(1,gameNumber);
+			// st.setString(2,gameNumber);
 			ResultSet res = st.executeQuery();
 			int i = 0;
 			while (res.next()) {
@@ -26,6 +31,13 @@ public class OneMatch {
 			oneGame.fullTime();
 			String winnerTeamName = oneGame.winnerName();
 			System.out.println(winnerTeamName);
+			
+			//次の組み合わせの設定
+			PreparedStatement st2 = con.prepareStatement("select winner_name from tournament_game_list where game_number = '1'; ");
+			ResultSet res2 = st2.executeQuery();
+			String nextGame = res2.getString("winner_name");
+			System.out.println(nextGame);
+
 
 	    } catch (SQLException e) {
 			System.out.println("Failed");
