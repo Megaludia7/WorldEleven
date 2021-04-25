@@ -17,9 +17,10 @@ public class OneMatch2 {
 			//次の組み合わせの設定
 			PreparedStatement st2 = con.prepareStatement("select winner_name from tournament_game_list where game_number = '1'; ");
 			ResultSet res2 = st2.executeQuery();
-			// String nextGame = res2.getString("winner_name");
-			// System.out.println(nextGame);
-
+			while (res2.next()) {
+				String nextGame = res2.getString("winner_name");
+				System.out.println(nextGame);
+			}
 
 	    } catch (SQLException e) {
 			System.out.println("Failed");

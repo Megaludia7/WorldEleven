@@ -35,8 +35,22 @@ public class OneMatch {
 			//次の組み合わせの設定
 			PreparedStatement st2 = con.prepareStatement("select winner_name from tournament_game_list where game_number = '1'; ");
 			ResultSet res2 = st2.executeQuery();
-			String nextGame = res2.getString("winner_name");
-			System.out.println(nextGame);
+			while (res2.next()) {
+				String nextGame = res2.getString("winner_name");
+				System.out.println(nextGame);
+				String[] nextGameList = nextGame.split(",");
+				int nextGameGameNumber = Integer.parseInt(nextGameList[0]);
+				String nextGameSide = nextGameList[1];
+				System.out.println(nextGameGameNumber);
+				System.out.println(nextGameSide);	
+				PreparedStatement stUp = con.prepareStatement("update tournament_game_list set team_name_1 = 'aho' where game_number = '5' ; ");
+				// stUp.setString(1,winnerTeamName);
+				// stUp.setInt(2, nextGameGameNumber);
+				int lines = stUp.executeUpdate();
+				// System.out.println("結果：" + lines);
+			}
+		
+
 
 
 	    } catch (SQLException e) {
