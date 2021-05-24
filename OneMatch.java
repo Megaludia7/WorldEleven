@@ -43,11 +43,12 @@ public class OneMatch {
 				String nextGameSide = nextGameList[1];
 				System.out.println(nextGameGameNumber);
 				System.out.println(nextGameSide);	
-				PreparedStatement stUp = con.prepareStatement("update tournament_game_list set team_name_1 = 'aho' where game_number = '5' ; ");
+				PreparedStatement stUp = con.prepareStatement("update tournament_game_list set team_name_1 = 'ahoaho' where game_number = '?' ; ");
+				// PreparedStatement stUp = con.prepareStatement("update tournament_game_list set team_name_1 = 'ahoaho' where game_number = '5' ; ");
 				// stUp.setString(1,winnerTeamName);
-				// stUp.setInt(2, nextGameGameNumber);
+				stUp.setInt(1, nextGameGameNumber);
 				int lines = stUp.executeUpdate();
-				// System.out.println("結果：" + lines);
+				System.out.println("結果：" + lines);
 			}
 		
 
