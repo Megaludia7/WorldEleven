@@ -15,7 +15,7 @@ public class OneLeagueMatch {
 	    try{
 			//チーム名の取得
 			con = DriverManager.getConnection("jdbc:mysql://localhost/worldeleven", "root", "mysql");
-			PreparedStatement st = con.prepareStatement("select team_name as name, team_power as power from league_team_list where team_code in (select team_code_1 as teamcode from league_game_list where game_number  = ? union select team_code_2 as teamname from league_game_list where game_number  = ?); ");
+			PreparedStatement st = con.prepareStatement("select team_name as name, team_power as power, win_times, draw_times, lost_times, score, lost_score from league_team_list where team_code in (select team_code_1 as teamcode from league_game_list where game_number  = ? union select team_code_2 as teamname from league_game_list where game_number  = ?); ");
 			st.setString(1,gameNumber);
 			st.setString(2,gameNumber);
 			ResultSet res = st.executeQuery();
@@ -24,19 +24,43 @@ public class OneLeagueMatch {
 			while (res.next()) {
 				String name = res.getString("name");
 				System.out.println("第一引数" + name);//Log
-				int power = res.getInt("power");
-				teamList[i] = new OneTeam(name,power);
+				teamList[i] = new OneTeam(name,res.getInt("power"),res.getInt("win_times"),res.getInt("draw_times"),res.getInt("lost_times"),res.getInt("score"),res.getInt("lost_score"));
 				i = i + 1;
 			}
-			// DemoGame oneGame = new DemoGame(teamList[0], teamList[1]);
+			LeagueGame oneGame = new LeagueGame(teamList[0], teamList[1]);
 
-			// // 試合の実施
-			// oneGame.fullTime();
-			// String winnerTeamName = oneGame.winnerName();
-			// System.out.println(winnerTeamName);//Log
-			// // 試合結果を記録する
-			
-			// // 次の組み合わせの設定
+			// 試合の実施
+			oneGame.fullTime();
+			String winnerTeamName = oneGame.winnerName();
+			System.out.println(winnerTeamName);//Log
+			System.out.println(teamList[0].getScore());//Log
+			System.out.println(teamList[1].getScore());//Log
+			// 試合結果を記録する
+			oneGame.setResult();
+
+			// チームの結果を記録する
+			// String sqlUp = "update league_team_list set win_point = '3',win_times = '1', score = ? where l_id = 'NA4A202106' and team_name = ? ;";
+
+			String resSQL ="update league_team_list set win_times = ?, draw_times = ?, lost_times = ?, score = ?, lost_score = ? where l_id = 'NA4A202106' and team_name = ? ;";
+			PreparedStatement stUp1 = con.prepareStatement(resSQL);
+			stUp1.setInt(1,teamList[0].getWinTimes());
+			stUp1.setInt(2,teamList[0].getDrawTimes());
+			stUp1.setInt(3,teamList[0].getLostTimes());
+			stUp1.setInt(4,teamList[0].getTotalScore());
+			stUp1.setInt(5,teamList[0].getTotalLostScore());
+			stUp1.setString(6, teamList[0].getTeamName());
+			PreparedStatement stUp2 = con.prepareStatement(resSQL);
+			stUp2.setInt(1,teamList[1].getWinTimes());
+			stUp2.setInt(2,teamList[1].getDrawTimes());
+			stUp2.setInt(3,teamList[1].getLostTimes());
+			stUp2.setInt(4,teamList[1].getTotalScore());
+			stUp2.setInt(5,teamList[1].getTotalLostScore());
+			stUp2.setString(6, teamList[1].getTeamName());
+
+			int lines = stUp1.executeUpdate();
+			int lines2 = stUp2.executeUpdate();
+			System.out.println("結果：" + lines + "結果：" + lines2);//Log
+			// // 次の組み合わせの
 			// PreparedStatement st2 = con.prepareStatement("select winner_name from tournament_game_list where game_number = ? ; ");
 			// st2.setInt(1,gameNumber);
 			// ResultSet res2 = st2.executeQuery();
