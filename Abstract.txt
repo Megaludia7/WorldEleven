@@ -22,3 +22,20 @@
     使用DB : tournament_game_list, nation_list
     2.1 MakeOneTournament
 
+
+
+
+
+
+101. 順位予測
+    input : 順位のデータベース, 最終節の対戦組み合わせの配列
+    output : 1位,2位のペアの配列
+
+    101.2. 試合結果の代入
+        input : 対戦組み合わせ, {得点, 失点}
+        output : 更新されたデータベース
+
+    101.3. 1位と2位の抽出
+        input : 順位のデータベース
+        output : {1位, 2位}
+

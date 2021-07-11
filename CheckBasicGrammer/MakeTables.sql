@@ -83,3 +83,5 @@ values
     ('NA4A202106', 'Germany','004');
 
 ALTER TABLE league_team_list ADD team_power int NOT NULL;
+
+update league_team_list set win_point = '3',win_times = '1', score = ? where l_id = 'NA4A202106' and team_name = ? ;
