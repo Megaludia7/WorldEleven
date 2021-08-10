@@ -11,7 +11,7 @@
             output : teamList[2]
     
     1.2. SetNextGame
-        input  : 勝者の名前 String
+        input  : 勝者の名前 String, gamenumber
         output : リターンコード
         更新DB : tournament_game_list
 
