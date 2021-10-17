@@ -4,11 +4,13 @@ public class OneTeam {
 	private int teamPower;
 	private String teamName;
 	private int score;
+	private int winPoint;
 	private int winTimes;
 	private int drawTimes;
 	private int lostTimes;
 	private int totalScore;
 	private int totalLostScore;
+	private int scoreDiff;
 
 	public OneTeam(String teamName) {
 		this.teamName = teamName;
@@ -34,6 +36,12 @@ public class OneTeam {
 		this.score = 0;
 	}
 
+	public OneTeam (String teamName, int winPoint, int totalScore, int scoreDiff) {
+		this.teamName = teamName;
+		this.winPoint = winPoint;
+		this.totalScore = totalScore;
+		this.scoreDiff = scoreDiff;
+	}
 	public int getScore() {
 		return score;
 	}
