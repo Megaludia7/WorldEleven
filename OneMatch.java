@@ -10,8 +10,6 @@ public class OneMatch {
 		String tournamentId = args[0];
 		System.out.println("第一引数" + tournamentId);//Log
 		int gameNumber = Integer.parseInt(args[1]);
-		// パラメータチェック実施
-		// int gameNumber = 1;
 		
 	    try{
 			//チーム名の取得

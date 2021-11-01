@@ -1,4 +1,6 @@
+// package playgame.modules;
 import java.util.Random;
+
 
 public class DemoGame {
 	private OneTeam team1,team2;

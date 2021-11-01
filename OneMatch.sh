@@ -5,5 +5,11 @@
 # input : t_id, game_number
 # output : none
 
+echo "Input Tournament ID"
+read first
+echo "Input GameNumber"
+read second
 
-java -cp /Users/shotamiyawaki/ProgramDev/JDBC/mysql-connector-java-8.0.21.jar: OneMatch $1 $2 
+echo "Let's start game!"
+
+java -cp /Users/shotamiyawaki/ProgramDev/JDBC/mysql-connector-java-8.0.21.jar: OneMatch $first $second

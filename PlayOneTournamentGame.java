@@ -1,15 +1,21 @@
+
 // import java.io.*;
 import java.sql.*;
 
 public class PlayOneTournamentGame {
 
-	public static void main (String[] args)  throws Exception {
+	private String tournamentId;
+	private int gameNumber;
+
+	public PlayOneTournamentGame(String tournamentId, int gameNumber) {
+		this.tournamentId = tournamentId;
+		this.gameNumber = gameNumber;
+	}
+
+	public DemoGame setGame() {
 
 	    Connection con = null;
 	    OneTeam[] teamList = new OneTeam[2];
-		String tournamentId = args[0];
-		System.out.println("第一引数" + tournamentId);//Log
-		int gameNumber = Integer.parseInt(args[1]);
 		// パラメータチェック実施
 		// int gameNumber = 1;
 		
