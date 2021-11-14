@@ -1,9 +1,10 @@
 // package playgame.modules;
 import java.util.Random;
+import java.sql.*;
 
 
 public class DemoGame {
-	private OneTeam team1,team2;
+	public OneTeam team1,team2;
 	private String teamName1,teamName2;
 
 	public DemoGame (OneTeam team1,OneTeam team2) {
@@ -68,7 +69,4 @@ public class DemoGame {
 			return "DRAW";
 		}
 	}
-
-
-
 }

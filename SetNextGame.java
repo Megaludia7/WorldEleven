@@ -2,16 +2,22 @@
 import java.sql.*;
 
 public class SetNextGame {
+	private String winnerTeamName;
+	private int gameNumber;
 
-	public bool setNextGame (String winnerTeamName, int gameNumber)  throws Exception {
+	public SetNextGame(String winnerTeamName,int gameNumber) {
+		this.winnerTeamName = winnerTeamName;
+		this.gameNumber = gameNumber;
+	}
+
+	public boolean setNextTournamentGame() {
 
 	    Connection con = null;
-	    OneTeam[] teamList = new OneTeam[2];		
 	    try{
 			// 次の組み合わせの設定
 			con = DriverManager.getConnection("jdbc:mysql://localhost/worldeleven", "root", "mysql");
 			PreparedStatement st2 = con.prepareStatement("select winner_name from tournament_game_list where game_number = ? ; ");
-			st2.setInt(1,gameNumber);
+			st2.setInt(1,this.gameNumber);
 			ResultSet res2 = st2.executeQuery();
 			while (res2.next()) {
 				String nextGame = res2.getString("winner_name");
@@ -29,13 +35,15 @@ public class SetNextGame {
 					sqlUp = "update tournament_game_list set team_name_2 = ? where game_number = ? ; ";
 				}
 				PreparedStatement stUp = con.prepareStatement(sqlUp);
-				stUp.setString(1,winnerTeamName);
+				stUp.setString(1,this.winnerTeamName);
 				stUp.setInt(2, nextGameGameNumber);
 				int lines = stUp.executeUpdate();
 				System.out.println("結果：" + lines);//Log
 			}
+			return true;
 	    } catch (SQLException e) {
 			System.out.println("Failed");
+			return false;
 	    }
 	}
 }
