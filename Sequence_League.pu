@@ -1,0 +1,28 @@
+@startuml
+title シーケンス図
+actor User
+User -> ExecuteMatchs: Execute(LeagueId, unit of games)
+activate ExecuteMatchs
+loop
+    ExecuteMatchs -> OneLeagueGame: <<create>>(leagueId, gameId)
+    activate OneLeagueGame
+    ExecuteMatchs -> OneLeagueGame: playOneLeagueGame()
+    OneLeagueGame -> CompetitionDAO: <<create>>(Info. of connection)
+    activate CompetitionDAO
+    OneLeagueGame -> CompetitionDAO: getGameInfo(leagueId, gameId)
+    OneLeagueGame <-- CompetitionDAO: teamList: TeamList[2]
+    deactivate CompetitionDAO
+    OneLeagueGame -> PlayGame: <<create>>(teamList)
+    activate PlayGame
+    OneLeagueGame -> PlayGame: playFulltime()
+    OneLeagueGame -> PlayGame: getResult()
+    OneLeagueGame <-- PlayGame: result: string[TBA]
+    deactivate PlayGame
+    ExecuteMatchs <-- OneLeagueGame: return-code
+    deactivate OneLeagueGame
+end
+deactivate ExecuteMatchs
+@enduml
+' -> 同期メッセージ
+' --> 応答メッセージ
+' ->> 非同期メッセージ

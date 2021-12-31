@@ -1,0 +1,18 @@
+@startuml
+class CompetitionDAO {
+    - string hostName
+    - string userId
+    - string password
+    + void connect()
+    + TeamList[2] getCompetition(tournamentId : string, gameNumber int )
+}
+@enduml
+
+
+
+    ' 1.1. PlayOneTournamentGame
+    '     input  : トーナメントid, gamenumber
+    '     output : 勝者の名前 String
+    '     1.1.1. CompetitionDAO
+    '         input  : tournament_game_list.gamenumber
+    '         output : teamList[2]

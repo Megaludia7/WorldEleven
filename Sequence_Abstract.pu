@@ -1,0 +1,18 @@
+@startuml
+title シーケンス図
+User -> OneMatchKai: Execute(tournamentId, gameNumber)
+activate OneMatchKai
+OneMatchKai -> PlayOneTournamentGame: Start game (tournamentId, gameNumber)
+activate PlayOneTournamentGame
+PlayOneTournamentGame --> OneMatchKai: the winner
+OneMatchKai -> PlayOneTournamentGame: Register result (tournamentId, gameNumber)
+PlayOneTournamentGame --> OneMatchKai: return-code
+deactivate PlayOneTournamentGame
+OneMatchKai -> SetNextGame: Set next match (winnerTeamName, tournamentId, gameNumber)
+activate SetNextGame
+SetNextGame --> OneMatchKai: return-code
+deactivate SetNextGame
+@enduml
+' -> 同期メッセージ
+' --> 応答メッセージ
+' ->> 非同期メッセージ

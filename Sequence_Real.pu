@@ -1,0 +1,20 @@
+@startuml
+title シーケンス図
+User -> OneMatchKai: Execute(tournamentId, gameNumber)
+activate OneMatchKai
+OneMatchKai -> PlayOneTournamentGame:  <<create>>(tournamentId, gameNumber)
+activate PlayOneTournamentGame
+OneMatchKai -> PlayOneTournamentGame: setGame()
+OneMatchKai -> PlayOneTournamentGame: getWinnerTeam()
+PlayOneTournamentGame --> OneMatchKai: winnerTeam
+OneMatchKai -> PlayOneTournamentGame: registerScore(tournamentId, gameNumber)
+deactivate PlayOneTournamentGame
+OneMatchKai -> SetNextGame: <<create>>(winnerTeamName, tournamentId, gameNumber)
+activate SetNextGame
+OneMatchKai -> SetNextGame: setNextTournamentGame()
+OneMatchKai <- SetNextGame: aho:boolean
+
+@enduml
+' -> 同期メッセージ
+' --> 応答メッセージ
+' ->> 非同期メッセージ
